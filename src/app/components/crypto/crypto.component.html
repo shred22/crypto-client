@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="jumbotron">
+    <div class="container">
+      <h3 class="display-4">Crypto Client</h3>
+      <p class="lead">It encrypts input data using RSA encryption Algorithm.</p>
+    </div>
+  </div>
+</div>
+<div class="container midpad">
+  <form>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Text to encrypt</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="textToBeEncrypted"
+            name="unencText"
+          />
+          <button
+            type="button"
+            class="btn btn-primary minpad"
+            (click)="onEncrypt($event)"
+          >
+            Encrypt
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Text to Decrypt</label>
+          <input
+            type="text"
+            class="form-control"
+            [disabled]="!isEncrypted"
+            [(ngModel)]="textToBeDecrypted"
+            name="decInput"
+          />
+          <button
+            type="button"
+            class="btn btn-dark minpad"
+            [disabled]="!isEncrypted"
+            (click)="onDecrypt()"
+          >
+            Decrypt
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div *ngIf="isEncrypted">
+        <label><b>Encrypted Text:</b></label>
+        <p>
+          {{ encryptedText }}
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div *ngIf="isDecrypted">
+        <label><b>Decrypted Text:</b></label>
+        <p>
+          {{ decryptedText }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <ngb-alert *ngIf="isDecrypted" type="success">{{alertMessage}}</ngb-alert>
+    </div>
+  </div>
+</div>
